@@ -2,7 +2,7 @@ import unittest
 
 from kccm import Config, KeywordCache, SlotRole
 from kccm.composer import Composer, ContextBudgetExceeded, estimate_tokens
-from kccm.models import Candidate, CacheEntry
+from kccm.models import Candidate
 
 
 def fill(cache: KeywordCache, count: int, summary_len: int = 60) -> None:

@@ -67,7 +67,7 @@ def main() -> int:
     for name, text in (("full", SYSTEM_PROMPT), ("lite", LITE_SYSTEM)):
         print(f"  系统指令 {name:<5} {estimate_tokens(text):>4} tokens（{len(text)} 字符）")
     base = Session(cfg=Config())
-    empty_prompt, empty_tokens = base.composer._render([], "问题", base.cache)  # noqa: SLF001
+    _, empty_tokens = base.composer._render([], "问题", base.cache)  # noqa: SLF001
     print(f"  空缓存整包（full）      {empty_tokens:>4} tokens  ← 第 1 轮的不可压缩部分")
     print(f"  空缓存整包（lite）      "
           f"{base.composer._render([], '问题', base.cache, style='lite')[1]:>4} tokens")
@@ -81,7 +81,7 @@ def main() -> int:
     print(f"{'轮次':<5}{'条目':>5}{'基线':>7}{'full':>7}{'lite':>7}"
           f"{'full/基线':>11}{'lite/基线':>11}")
     print("-" * 60)
-    for (t, ft, b, bd, n), (_, lt, _, _, _) in zip(full_rows, lite_rows):
+    for (t, ft, b, _, n), (_, lt, _, _, _) in zip(full_rows, lite_rows):
         print(f"{t:<6}{n:>6}{b:>8}{ft:>8}{lt:>8}{ft / b:>10.2f}x{lt / b:>10.2f}x")
 
     print()
