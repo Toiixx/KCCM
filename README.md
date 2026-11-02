@@ -3,6 +3,7 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Tests](https://img.shields.io/badge/tests-58%20passed-brightgreen)
+[![CI](https://github.com/Toiixx/kccm/actions/workflows/ci.yml/badge.svg)](https://github.com/Toiixx/kccm/actions/workflows/ci.yml)
 
 **用 10 回合滑动窗口 + 关键词级 TTL/LFU 的显式记忆字典，替代多轮对话中"每轮把全部历史重新塞进 prompt"的累积式回放。**
 
@@ -257,7 +258,8 @@ kccm/
 │   └── traces/                 可重放的 JSONL 轨迹
 │
 ├── tests/                      58 个用例，全部离线
-└── docs/                       设计、开销、限制、轨迹、旁路、流式
+├── docs/                       设计、开销、限制、轨迹、旁路、流式
+└── .github/workflows/ci.yml    Python 3.10–3.13 × Ubuntu/Windows + ruff/mypy
 ```
 
 模块边界：`extractor` 只产候选不写缓存，`cache` 只改状态不碰文本，`composer` 只读快照不改字典。三者可独立替换。
