@@ -49,6 +49,12 @@ kccm = ["data/*.txt"]
 line-length = 100
 target-version = "py310"
 
+# 显式声明规则集，不跟随 ruff 版本的默认值漂移。
+# E4/E7/E9 = 导入、比较、语法错误；F = pyflakes（未使用导入/变量、未定义名等）。
+# 若想引入 UP/I/RUF 等现代化规则，应单开一个提交并同步修完全部告警。
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
