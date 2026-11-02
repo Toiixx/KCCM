@@ -104,7 +104,11 @@ class Session:
             turn, question, rule_keywords, bypass
         )
 
-        answer = self.llm.complete(composed.prompt)
+        # __post_init__ 已保证 llm 非空；这里显式窄化，避免依赖隐式约定
+        llm = self.llm
+        if llm is None:  # pragma: no cover - 防御分支
+            raise RuntimeError("LLM 后端未初始化")
+        answer = llm.complete(composed.prompt)
         self._dialogue.append((question, answer))
 
         result = TurnResult(

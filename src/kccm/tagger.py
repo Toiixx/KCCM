@@ -97,12 +97,12 @@ class LexiconTagger:
                 i += 1
                 continue
             kind, piece = self._match(text, i)
-            if kind == "lex":
+            if kind == "lex" and piece is not None:
                 role, slot, hint = self._lexicon[piece]
                 hits.append(NounHit(piece, i, i + len(piece), role, slot, hint))
                 i += len(piece)
                 continue
-            if kind == "skip":
+            if kind == "skip" and piece is not None:
                 i += len(piece)
                 continue
             if relaxed:
