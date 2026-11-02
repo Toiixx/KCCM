@@ -1,0 +1,20 @@
+# KCCM 运行参数（唯一真值表）
+# 修改任何一项都会改变淘汰行为，README「配置项」一节列出了调参后果。
+
+ttl_max: 10            # 关键词连续 10 回合未被提及即删除（硬约束）
+max_entries: 32        # 字典条目上限，触顶启动 LFU 腾挪
+ttl_tolerance: 2       # TTL 差 ≤2 视为“相近”，进入同一 LFU 比较桶
+prompt_budget: 6912    # 8192(上下文) - 1024(输出预留) - 256(安全边际)
+summary_max_chars: 120 # 来源摘要上限
+template_version: "v2"
+prompt_style: "full"   # full（结构化）| lite（精简，短会话省约 40% token）
+
+# 短会话旁路：off | fixed（按轮次）| auto（按 token 择优）
+# 这里是推荐配置；库的默认值是 off，保证纯机制行为可复现
+hybrid_mode: "auto"
+hybrid_turns: 6           # 仅 fixed 模式生效
+hybrid_recent: 0          # 旁路带几轮原文；0 = 全量历史
+hybrid_skip_cache: false  # 仅实验用：旁路期不建缓存，会让切换轮失忆
+switch_hysteresis: 0.10   # auto 死区：便宜不足 10% 不切换
+hybrid_lookahead: true    # auto 外推：按下一轮预测长度判，需与死区配套
+bridge_once: true         # 切回缓存的首轮补一次上一轮原文

@@ -1,0 +1,20 @@
+# 词典格式：word|role|slot|num_hint
+# role  ∈ subject/object/quantity/recipient/attribute/constraint/time/location
+# slot  = 该名词独占的实体槽位；list.* 会在运行时追加关键词后缀以保证槽位唯一
+# num_hint = 该名词被数量词修饰时，数量所占的槽位前缀（apple → apple.count）
+苹果|object|item|apple
+梨|object|item|item
+橘子|object|item|item
+橙子|object|item|item
+桃|object|item|item
+香蕉|object|list.item|list
+牛奶|object|list.item|list
+面包|object|list.item|list
+鸡蛋|object|list.item|list
+每个人|recipient|share.per_person|person
+每人|recipient|share.per_person|person
+单价|attribute|price.unit|price
+总价|attribute|total.amount|total
+运费|attribute|shipping.amount|shipping
+折扣|attribute|discount.ratio|discount
+库存|attribute|stock.amount|stock

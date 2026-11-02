@@ -1,0 +1,6 @@
+# 核心机制（src/kccm）只依赖 Python 标准库，安装本文件不是运行的必需条件。
+# 以下为可选能力的依赖，等价于：pip install -e ".[llm,jieba]"
+
+requests>=2.31   # examples/deepseek_flash_demo.py：requests 直连 /v1/chat/completions
+openai>=1.30     # kccm.OpenAICompatibleLLM：任意 OpenAI 兼容端点
+jieba>=0.42      # 生产级中文分词；缺失时自动降级为内置词典标注器

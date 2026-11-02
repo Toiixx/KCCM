@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kccm"
+version = "2.0.0"
+description = "Keyword-Cache Context Management: replace cumulative full-history replay in multi-turn LLM dialogue"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "KCCM contributors" }]
+keywords = ["llm", "context-management", "memory", "multi-turn", "lfu", "ttl", "prompt-engineering"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+jieba = ["jieba>=0.42"]
+llm = ["openai>=1.30", "requests>=2.31"]
+dev = ["pytest>=8", "ruff>=0.5", "mypy>=1.10"]
+
+[project.scripts]
+kccm = "kccm.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Toiixx/kccm"
+Repository = "https://github.com/Toiixx/kccm"
+Issues = "https://github.com/Toiixx/kccm/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+kccm = ["data/*.txt"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
